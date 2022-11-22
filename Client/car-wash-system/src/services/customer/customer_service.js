@@ -7,7 +7,7 @@ const CUST_ORDER = "http://localhost:8080/customer/order/";
 class CustomerService {
   placeOrder(
     customerId,
-    customerName,
+    firstName,
     carName,
     carNumber,
     custAddress,
@@ -19,7 +19,7 @@ class CustomerService {
         ORDER_URL + "addOrder",
         {
           customerId,
-          customerName,
+          firstName,
           carName,
           carNumber,
           custAddress,

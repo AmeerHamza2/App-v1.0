@@ -4,7 +4,7 @@ const Order = require("../model/orderModel");
 exports.addOrder = (req, res) => {
   const order = new Order({
     customerId: req.body.customerId,
-    customerName: req.body.customerName,
+    firstName: req.body.firstName,
     carName: req.body.carName,
     carNumber: req.body.carNumber,
     custAddress: req.body.custAddress,

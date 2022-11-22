@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AdminOrders from "../../../services/member/orders.js/admin_orders";
-import MechanicController from "../../../services/member/Mechanic/Mechanic_Services"
+import MechanicController from "../../../services/member/Mechanic/Mechanic_Services";
 import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const [mechanics, setMechanics] = useState([])
+  const [mechanics, setMechanics] = useState();
   const [completedOrders, setCompletedOrders] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -15,16 +15,22 @@ function Orders() {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
-  
+  // A function to extract the id and name of mechanics
+  function createMechanic(item) {
+    const id = [item._id];
+    return { [id]: item.firstname };
+  }
+
   const getAvailableMechanics = () => {
-      MechanicController.findAvailable()
+    MechanicController.findAvailable()
       .then((response) => {
-        setMechanics(response);
-      }).catch((err) => {
+        setMechanics(response.map(createMechanic));
+      })
+      .catch((err) => {
         console.log(err);
       });
-  }
-  
+  };
+
   const getPlacedOrders = () => {
     AdminOrders.findPlacedOrders()
       .then((response) => {
@@ -51,17 +57,18 @@ function Orders() {
     getAvailableMechanics();
   }, []);
 
-  console.log(mechanics)
-
   const dynamicMechanicsLookUp = {
-    "5637b5d258d14c01960963e81": "hamza",
+    "637cf30715c4ce0238ee8da8": "Usman",
     "5f448212e2fd8a20782f6d83": "Mechanic 2",
     "5f448222e2fd8a20782f6d84": "Mechanic 3",
     "5f4dde667a82de39880f577c": "Mechanic 4",
   };
+  // console.log(dynamicMechanicsLookUp);
+  // console.log(mechanics);
+
   const [columns, setColumns] = useState([
     { title: "OrderId", field: "_id", editable: "never" },
-    { title: "Customer Name", field: "customerName", editable: "never" },
+    { title: "Customer Name", field: "firstName", editable: "never" },
     { title: "Car Name", field: "carName", editable: "never" },
     { title: "Car Number", field: "carNumber", editable: "never" },
     { title: "Address", field: "custAddress", editable: "never" },
@@ -76,7 +83,7 @@ function Orders() {
 
   const [column, setColumn] = useState([
     { title: "OrderId", field: "_id" },
-    { title: "Customer Name", field: "customerName" },
+    { title: "First Name", field: "firstName" },
     { title: "Car Name", field: "carName" },
     { title: "Car Number", field: "carNumber" },
     { title: "Address", field: "custAddress" },
@@ -86,6 +93,7 @@ function Orders() {
   ]);
 
   const handleRowUpdate = (newData, oldData, resolve) => {
+    console.log(oldData)
     let errorList = [];
     if (errorList.length < 1) {
       AdminOrders.assignOrder(newData._id, newData.mechanicId)
@@ -112,7 +120,6 @@ function Orders() {
       resolve();
     }
   };
-
   const [display, setdisplay] = useState(false);
   const openTable = () => {
     setdisplay(true);
@@ -134,9 +141,11 @@ function Orders() {
           data={orders}
           editable={{
             onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
+            
+            new Promise((resolve, reject) => {
                 handleRowUpdate(newData, oldData, resolve);
-              }),
+              }).then(console.log(newData)),
+              
           }}
           options={{
             headerStyle: {
