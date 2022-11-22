@@ -15,6 +15,7 @@ function FindOrders() {
 
   useEffect(() => {
     const mechanic = AuthService.getCurrentMechanic();
+    console.log(mechanic)
     MechanicOrders.getInProcessOrders(mechanic.userId)
       .then((response) => {
         setOrders(response);
@@ -24,6 +25,8 @@ function FindOrders() {
       });
   }, []);
 
+  console.log(orders)
+
   const dynamicMechanicsLookUp = {
     ACCEPTED: "ACCEPTED",
     REJECT: "REJECTED",
@@ -31,7 +34,7 @@ function FindOrders() {
   };
   const [columns, setColumns] = useState([
     { title: "OrderId", field: "_id", editable: "never" },
-    { title: "Customer Name", field: "customerName", editable: "never" },
+    { title: "Customer Name", field: "firstName", editable: "never" },
     { title: "Car Name", field: "carName", editable: "never" },
     { title: "Car Number", field: "carNumber", editable: "never" },
     { title: "Address", field: "custAddress", editable: "never" },

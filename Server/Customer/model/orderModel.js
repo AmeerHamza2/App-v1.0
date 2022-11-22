@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
   customerId: { type: String },
-  customerName: { type: String },
+  firsrName: { type: String },
   carName: { type: String },
   carNumber: { type: String },
   custAddress: { type: String, max: 40 },

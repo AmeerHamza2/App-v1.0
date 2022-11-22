@@ -53,7 +53,7 @@ function Order(props) {
   const onSubmit = (values) => {
     CustomerService.placeOrder(
       user.userId,
-      user.name,
+      user.firstname,
       car.name,
       values.carNumber,
       values.custAddress,
@@ -78,7 +78,7 @@ function Order(props) {
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <p className="title_subHeading">PERSONAL DETAILS</p>
             <h4>Email Id: {user.email}</h4>
-            <h4>Name: {user.name}</h4>
+            <h4>Name: {user.firstname}</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
                 <Grid item xs={6} sm={6} md={6} lg={6}>
