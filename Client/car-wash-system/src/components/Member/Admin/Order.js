@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AdminOrders from "../../../services/member/orders.js/admin_orders";
+import MechanicController from "../../../services/member/Mechanic/Mechanic_Services"
 import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
+  const [mechanics, setMechanics] = useState([])
   const [completedOrders, setCompletedOrders] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -13,6 +15,16 @@ function Orders() {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
+  
+  const getAvailableMechanics = () => {
+      MechanicController.findAvailable()
+      .then((response) => {
+        setMechanics(response);
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+  
   const getPlacedOrders = () => {
     AdminOrders.findPlacedOrders()
       .then((response) => {
@@ -36,10 +48,13 @@ function Orders() {
   useEffect(() => {
     getPlacedOrders();
     getCompletedOrders();
+    getAvailableMechanics();
   }, []);
 
+  console.log(mechanics)
+
   const dynamicMechanicsLookUp = {
-    "5f4481fae2fd8a20782f6d82": "Mechanic 1",
+    "5637b5d258d14c01960963e81": "hamza",
     "5f448212e2fd8a20782f6d83": "Mechanic 2",
     "5f448222e2fd8a20782f6d84": "Mechanic 3",
     "5f4dde667a82de39880f577c": "Mechanic 4",

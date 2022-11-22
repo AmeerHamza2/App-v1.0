@@ -29,7 +29,8 @@ function Mechanic() {
 
   const [columns, setColumns] = useState([
     { title: "ID", field: "_id" },
-    { title: "Name", field: "name" },
+    { title: "Firstname", field: "firstname" },
+    { title: "Lastname", field: "lastname" },
     { title: "Email", field: "email" },
     { title: "Mobile", field: "mobile" },
     { title: "Status", field: "status" },
@@ -67,7 +68,7 @@ function Mechanic() {
         console.log(err);
       });
   };
-
+  
   const handleRowDelete = (oldData, resolve) => {
     MechanicServices.deleteAccount(oldData._id)
       .then((res) => {
@@ -87,7 +88,7 @@ function Mechanic() {
         resolve();
       });
   };
-
+  console.log(mechanic)
   return (
     <div className="cars_container">
       <h3>Mechanic Operations</h3>

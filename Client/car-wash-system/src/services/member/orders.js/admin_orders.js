@@ -1,7 +1,7 @@
 import authHeader from "../auth_header";
 import axios from "axios";
 
-const ORDER_URL = "http://localhost:8010/admin/order/";
+const ORDER_URL = "http://localhost:8088/admin/order/";
 const COMPLTED_ORDERS_URL = "http://localhost:8030/order/";
 
 class AdminOrders {

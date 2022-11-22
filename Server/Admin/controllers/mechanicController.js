@@ -2,7 +2,7 @@ const Member = require("../model/memberModel");
 
 //FInd Available Mechanics
 exports.findAvailable = (req, res) => {
-  Member.find({ status: "AVAILABLE" })
+  Member.find({ status: "AVAILABLE" , role: "MECHANIC"})
     .exec()
     .then((response) => {
       if (response.length == 0) {
@@ -25,8 +25,8 @@ exports.findAvailable = (req, res) => {
 
 //FInd All Mechanics
 exports.findAll = (req, res) => {
-  Member.find()
-    .select("name email mobile status")
+  Member.find({role:"MECHANIC"})
+    .select("firstname lastname email mobile status")
     .exec()
     .then((response) => {
       if (response.length == 0) {
