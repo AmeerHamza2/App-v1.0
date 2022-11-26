@@ -10,6 +10,7 @@ exports.addOrder = (req, res) => {
     custAddress: req.body.custAddress,
     serviceName: req.body.serviceName,
     servicePrice: req.body.servicePrice,
+    serviceProviderId: req.body.serviceProviderId
   });
   order
     .save()
@@ -30,7 +31,7 @@ exports.addOrder = (req, res) => {
 
 //Find Completed Orders
 exports.findCompltedOrders = (req, res) => {
-  Order.find({ status: "COMPLETED" })
+  Order.find({ status: "COMPLETED", serviceProviderId: req.params.serviceProviderId })
     .exec()
     .then((response) => {
       if (response.length == 0) {

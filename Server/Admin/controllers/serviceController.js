@@ -16,6 +16,7 @@ exports.addService = (req, res) => {
           description: req.body.description,
           timeRequired: req.body.timeRequired,
           where: req.body.where,
+          serviceProviderId: req.body.serviceProviderId
         });
         service.save().then((response) => {
           console.log("Service Added: " + response);
@@ -34,6 +35,29 @@ exports.addService = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
+  ServiceModel.find({serviceProviderId: req.params.serviceProviderId})
+    .select("-__v")
+    .exec()
+    .then((response) => {
+      if (response.length == 0) {
+        res.status(200).json({
+          message: "No Services Available at this Time",
+        });
+      } else {
+        res.status(200).json({
+          service: response,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Find All Method Error: " + err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+exports.findAllServicesForCustomer = (req, res) => {
   ServiceModel.find()
     .select("-__v")
     .exec()
@@ -55,6 +79,7 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
 
 exports.updateService = (req, res) => {
   const id = req.params.serviceId;

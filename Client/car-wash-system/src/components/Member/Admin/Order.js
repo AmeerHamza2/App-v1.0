@@ -4,6 +4,7 @@ import MechanicController from "../../../services/member/Mechanic/Mechanic_Servi
 import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
+import AuthService from "../../../services/member/auth_service"
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -15,11 +16,13 @@ function Orders() {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
+  const serviceProvider = AuthService.getAdmin();
   // A function to extract the id and name of mechanics
   function createMechanic(item) {
     const id = [item._id];
     return { [id]: item.firstname };
   }
+
 
   const getAvailableMechanics = () => {
     MechanicController.findAvailable()
@@ -32,7 +35,7 @@ function Orders() {
   };
 
   const getPlacedOrders = () => {
-    AdminOrders.findPlacedOrders()
+    AdminOrders.findPlacedOrders(serviceProvider.userId)
       .then((response) => {
         setOrders(response);
       })
@@ -42,7 +45,7 @@ function Orders() {
   };
 
   const getCompletedOrders = () => {
-    AdminOrders.findCompletedOrders()
+    AdminOrders.findCompletedOrders(serviceProvider.userId)
       .then((res) => {
         setCompletedOrders(res);
       })
@@ -58,13 +61,14 @@ function Orders() {
   }, []);
 
   const dynamicMechanicsLookUp = {
-    "637cf30715c4ce0238ee8da8": "Usman",
+    "6382142d2e7e8d69487335b9": "Usman",
     "5f448212e2fd8a20782f6d83": "Mechanic 2",
     "5f448222e2fd8a20782f6d84": "Mechanic 3",
     "5f4dde667a82de39880f577c": "Mechanic 4",
   };
-  // console.log(dynamicMechanicsLookUp);
-  // console.log(mechanics);
+  console.log(dynamicMechanicsLookUp);
+   
+  console.log({...mechanics});
 
   const [columns, setColumns] = useState([
     { title: "OrderId", field: "_id", editable: "never" },
@@ -73,6 +77,7 @@ function Orders() {
     { title: "Car Number", field: "carNumber", editable: "never" },
     { title: "Address", field: "custAddress", editable: "never" },
     { title: "Service Name", field: "serviceName", editable: "never" },
+    { title: "Status", field: "status", editable: "never" },
     { title: "Price", field: "servicePrice", editable: "never" },
     {
       title: "Assign Mechanic",
@@ -88,12 +93,13 @@ function Orders() {
     { title: "Car Number", field: "carNumber" },
     { title: "Address", field: "custAddress" },
     { title: "Service Name", field: "serviceName" },
+    { title: "Status", field: "status" },
     { title: "Price", field: "servicePrice" },
     { title: "Assigned Mechanic", field: "mechanicId" },
   ]);
 
   const handleRowUpdate = (newData, oldData, resolve) => {
-    console.log(oldData)
+    //console.log(oldData)
     let errorList = [];
     if (errorList.length < 1) {
       AdminOrders.assignOrder(newData._id, newData.mechanicId)
@@ -101,6 +107,7 @@ function Orders() {
           const dataUpdate = [...orders];
           const index = oldData.tableData.id;
           dataUpdate[index] = newData;
+          console.log(newData)
           setOrders([...dataUpdate]);
           resolve();
           setIserror(false);

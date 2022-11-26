@@ -14,10 +14,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose
-  .connect(
-    `mongodb+srv://root:${dbConfig.PASSWORD}@learnmongodb.tuuzo.mongodb.net/${dbConfig.DBNAME}?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-  )
+.connect(
+  "mongodb://localhost:27017",
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
+)
   .catch((err) => {
     console.log("Database Connection Error: " + err);
   });

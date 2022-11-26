@@ -5,9 +5,9 @@ const ORDER_URL = "http://localhost:8088/admin/order/";
 const COMPLTED_ORDERS_URL = "http://localhost:8030/order/";
 
 class AdminOrders {
-  findPlacedOrders() {
+  findPlacedOrders(serviceProviderId) {
     return axios
-      .get(ORDER_URL + "findPlacedOrder", { headers: authHeader() })
+      .get(ORDER_URL + `findPlacedOrder/${serviceProviderId}`, { headers: authHeader() })
       .then((res) => {
         console.log(res.data);
         return res.data.orders;
@@ -34,9 +34,9 @@ class AdminOrders {
       });
   }
 
-  findCompletedOrders() {
+  findCompletedOrders(serviceProviderId) {
     return axios
-      .get(COMPLTED_ORDERS_URL + "findCompltedOrders")
+      .get(COMPLTED_ORDERS_URL + `findCompltedOrders/${serviceProviderId}`)
       .then((res) => {
         return res.data.orders;
       })

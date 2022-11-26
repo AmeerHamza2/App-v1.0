@@ -6,6 +6,6 @@ router.post("/login", AuthController.login);
 
 router.post("/register", AuthController.register);
 
-//router.post("/registerMechanic", mechanicAuthController.registerMechanic);
+router.post("/registerMechanic", AuthController.registerMechanic);
 
 module.exports = router;

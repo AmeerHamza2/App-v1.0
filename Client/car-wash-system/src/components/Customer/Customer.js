@@ -40,7 +40,7 @@ function Cust_Home(props) {
           path="/cust_home/mybookings"
           render={(props) => <MyBookings {...props} />}
         />
-        <Route path="/login" component={Login} />
+       
       </Switch>
     </div>
   );

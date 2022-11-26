@@ -12,7 +12,8 @@ class CustomerService {
     carNumber,
     custAddress,
     serviceName,
-    servicePrice
+    servicePrice,
+    serviceProviderId
   ) {
     return axios
       .post(
@@ -25,6 +26,7 @@ class CustomerService {
           custAddress,
           serviceName,
           servicePrice,
+          serviceProviderId
         },
         {
           headers: authHeader(),

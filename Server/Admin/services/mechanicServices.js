@@ -10,7 +10,7 @@ router.get(
 );
 
 router.get(
-  "/findAll",
+  "/findAll/:serviceProviderId",
   [checkAuth.verifyToken, checkAuth.isAdmin],
   MechanicController.findAll
 );

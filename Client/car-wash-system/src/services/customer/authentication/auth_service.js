@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
 const AUTH_URL = "http://localhost:8080/customer/auth/";
 
 class AuthService {
@@ -15,11 +15,17 @@ class AuthService {
           this.authenticated = true;
           localStorage.setItem("customer", JSON.stringify(response.data));
         }
-
+        toast.success("Login Successfully !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         return response.data;
       })
       .catch((err) => {
+        toast.error("Invalid Email or Password !", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         console.log("Login Error: " + err);
+
         return err;
       });
   }

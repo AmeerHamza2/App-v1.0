@@ -4,9 +4,9 @@ import authHeader from "../auth_header";
 const API_URL = "http://localhost:8088/admin/car-services/";
 
 class Package {
-  getAllServices() {
+  getAllServices(serviceProviderId) {
     return axios
-      .get(API_URL + "findAll")
+      .get(API_URL + `findAll/${serviceProviderId}`)
       .then((response) => {
         return response.data.service;
       })
@@ -15,11 +15,22 @@ class Package {
       });
   }
 
-  addService(serviceType, name, price, description, timeRequired, where) {
+  getAllServicesForCustomer() {
+    return axios
+      .get(API_URL + `findAllServicesForCustomer/`)
+      .then((response) => {
+        return response.data.service;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  addService(serviceType, name, price, description, timeRequired, where, serviceProviderId) {
     return axios
       .post(
         API_URL + "addService",
-        { serviceType, name, price, description, timeRequired, where },
+        { serviceType, name, price, description, timeRequired, where, serviceProviderId },
         {
           headers: authHeader(),
         }

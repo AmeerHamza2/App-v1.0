@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.css";
+import Logo from "../../assets/images/Logo.png"
+
 import {  NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -23,8 +25,8 @@ function Navbar() {
       <a href="/">
         <img
           className="nav__logo"
-          src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
-          alt="WYPE LOGO"
+          src= {Logo}
+          alt="CARSAZ LOGO"
         />
       </a>
       <div

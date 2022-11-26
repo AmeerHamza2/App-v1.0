@@ -6,6 +6,7 @@ const serviceSchema = mongoose.Schema({
     max: 15,
     required: true,
   },
+  serviceProviderId: { type: String },
   name: {
     type: String,
     required: true,

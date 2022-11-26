@@ -5,6 +5,7 @@ const API_URL = "http://localhost:8020/mechanic/orders/";
 
 class MechanicOrders {
   getInProcessOrders(mechId) {
+    console.log("API Hit!");
     console.log("Method: " + mechId);
     return axios
       .get(API_URL + `findInProcessOrders/${mechId}`, {

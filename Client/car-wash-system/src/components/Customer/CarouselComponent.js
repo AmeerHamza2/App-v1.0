@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import "./CSS/CarouselComp.css";
-import Image1 from "../../assets/images/carousel/ac_disinfection_banner.png";
+
 import Image2 from "../../assets/images/carousel/ac-services_banner.jpg";
 import Image3 from "../../assets/images/carousel/battery-services_banner.jpg";
 import Image4 from "../../assets/images/carousel/clean-services_banner.png";
@@ -12,9 +12,7 @@ function CarouselComponent() {
   return (
     <div className="carousel">
       <Carousel>
-        <Carousel.Item>
-          <img className="image" src={Image1} alt="Slider 1" />
-        </Carousel.Item>
+       
         <Carousel.Item>
           <img className="image" src={Image2} alt="Slider 1" />
         </Carousel.Item>

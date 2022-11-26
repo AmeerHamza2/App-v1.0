@@ -4,6 +4,8 @@ import HomeIcon from "@material-ui/icons/Home";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AuthService from "../../../services/member/auth_service";
+
 import {
   Drawer,
   List,
@@ -15,6 +17,9 @@ import { withRouter } from "react-router-dom";
 
 function MechanicHome(props) {
   const { history } = props;
+
+  const mechanic = AuthService.getCurrentMechanic();
+
 
   const itemList = [
     {
@@ -41,7 +46,7 @@ function MechanicHome(props) {
   return (
     <div className="admin_home">
       <hr />
-      <h1>WELCOME MECHANIC</h1>
+      <h1>WELCOME {mechanic.name.toUpperCase()}</h1>
       <hr />
 
       <Drawer variant="permanent" className="drawer">

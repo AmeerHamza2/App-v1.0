@@ -5,13 +5,16 @@ import banner_2 from "../../assets/images/banner_2.jpg";
 import banner_3 from "../../assets/images/banner_3.png";
 import banner_4 from "../../assets/images/banner_4.png";
 import banner_5 from "../../assets/images/banner_5.png";
+import CarouselComponent from "../Customer/CarouselComponent";
+
 
 function WhyUs() {
   return (
     <div className="component">
+        <CarouselComponent />
       <div className="banner">
         <div>
-          <img className="banner__image" src={banner_2} alt="WYPE LOGO" />
+          <img className="banner__image" src={banner_2} alt="CARSAZ LOGO" />
         </div>
         <div className="banner__contentRight">
           <br /> <br /> <br />
@@ -25,7 +28,7 @@ function WhyUs() {
       </div>
 
       <hr />
-      <h1 className="banner__heading">The Wype Way</h1>
+      <h1 className="banner__heading">The CARSAZ Way</h1>
       <h4 className="banner__feature">
         CONVENIENT • TRANSPARENT • QUALITY • RELIABLE
       </h4>
@@ -54,13 +57,13 @@ function WhyUs() {
           </p>
         </div>
         <div>
-          <img className="banner__image" src={banner_3} alt="WYPE LOGO" />
+          <img className="banner__image" src={banner_3} alt="CARSAZ LOGO" />
         </div>
       </div>
 
       <div className="banner">
         <div>
-          <img className="banner__image" src={banner_4} alt="WYPE LOGO" />
+          <img className="banner__image" src={banner_4} alt="CARSAZ LOGO" />
         </div>
         <div className="banner__contentRight">
           <h1 className="feature__heading">TRANSPARENT</h1>
@@ -108,7 +111,7 @@ function WhyUs() {
           </p>
         </div>
         <div>
-          <img className="banner__image" src={banner_5} alt="WYPE LOGO" />
+          <img className="banner__image" src={banner_5} alt="CARSAZ LOGO" />
         </div>
       </div>
     </div>

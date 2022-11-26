@@ -14,12 +14,16 @@ import {
   ListItemIcon,
   ListItemText,
   makeStyles,
+  Portal,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
+import AuthService from "../../../services/member/auth_service"
 
 function AdminHome(props) {
   const { history } = props;
   const [orders, setOrders] = useState([]);
+  const [pOrders, setpOrders] = useState([]);
+  const serviceProvider = AuthService.getAdmin();
 
   const itemList = [
     {
@@ -55,29 +59,63 @@ function AdminHome(props) {
   ];
 
   const getCompletedOrders = () => {
-    AdminOrders.findCompletedOrders()
+    AdminOrders.findCompletedOrders(serviceProvider.userId)
       .then((res) => {
         setOrders(res);
       })
       .catch((err) => {
         console.log(err);
       });
+
+
   };
 
-  // useEffect(() => {
-  //   getCompletedOrders();
-  // }, []);
+  const getInProcessOrders = () => {
+    AdminOrders.findPlacedOrders(serviceProvider.userId)
+      .then((res) => {
+        setpOrders(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+  };
+
+
+  useEffect(() => {
+    getCompletedOrders();
+   getInProcessOrders();
+
+  }, []);
+
+  
 
   return (
     <div className="admin_home">
       <hr />
       <h1>WELCOME ADMIN</h1>
       <h1>
-        Your Total Earnings: PKR
-        {orders
+        Your Total Earnings: PKR 
+        {orders ? (orders
           .map((order) => order.servicePrice)
-          .reduce((prev, next) => prev + next, 0)}
+          .reduce((prev, next) => prev + next, 0)): "0"}
       </h1>
+      <hr />
+      <hr />
+      <h2><strong>Order Details</strong></h2>
+      <h3>
+        Your Total Orders: 
+        {orders && pOrders ? (orders.length + pOrders.length): "0"}
+      </h3>
+      <h3>
+        Completed Orders: 
+        {orders? (orders.length) : "0"}
+      </h3>
+      <h3>
+        Accepted In Process Orders: 
+        {pOrders ? (pOrders.length) : "0"}
+      </h3>
       <hr />
 
       <Drawer variant="permanent" className="drawer">

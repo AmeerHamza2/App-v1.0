@@ -34,21 +34,16 @@ class AuthService {
       });
   }
 
-  registerMechanic(name, email, password, mobile) {
-    return axios
-      .post(
-        AUTH_URL + "registerMechanic",
-        { name, email, password, mobile },
-        {
-          headers: authHeader(),
-        }
-      )
-      .then((res) => {
-        return res.data.message;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  registerMechanic(firstname,lastname, email, password, mobile, role,serviceProviderId) {
+    return axios.post(AUTH_URL + `registerMechanic/`, {
+      firstname,
+      lastname,
+      email,
+      password,
+      mobile,
+      role,
+      serviceProviderId
+    });
   }
 
   logout() {

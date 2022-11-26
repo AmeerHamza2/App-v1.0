@@ -8,6 +8,7 @@ const orderSchema = mongoose.Schema({
   custAddress: { type: String, max: 40 },
   serviceName: { type: String },
   servicePrice: { type: Number },
+  serviceProviderId: { type: String},
   mechanicId: { type: String },
   requestedOn: { type: Date, default: Date.now() },
   deliveredOn: { type: Date },

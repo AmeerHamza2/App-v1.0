@@ -10,7 +10,7 @@ router.post(
   CarController.addCar
 );
 
-router.get("/findAll", CarController.findAllCars);
+router.get("/findAll/", CarController.findAllCars);
 
 //FInd All Brands
 router.get("/findAllBrands", CarController.findAllBrands);

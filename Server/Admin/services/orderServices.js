@@ -4,7 +4,7 @@ const checkAuth = require("../middlewares/check-auth");
 const OrderController = require("../controllers/orderController");
 
 router.get(
-  "/findPlacedOrder",
+  "/findPlacedOrder/:serviceProviderId",
   [checkAuth.verifyToken, checkAuth.isAdmin],
   OrderController.findPlacedOrders
 );

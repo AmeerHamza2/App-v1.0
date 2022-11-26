@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import WhyUs from "./WhyUs";
-import Login from "./Login";
-import Register from "./Register";
-import Member_Login from "../Member/Member_Login";
+//import Login from "./Login";
+//import Register from "./REGISTER";
+//import Member_Login from "../Member/Member_Login";
 import Contact from "./Contact";
 import Working from "./Working";
-import MemberRegister from "../../components/Member/MemberRegister"
+//import MemberRegister from "../../components/Member/MemberRegister"
 
 
 function Home() {
@@ -19,10 +19,8 @@ function Home() {
         <Route exact path="/whyus" component={WhyUs} />
         <Route exact path="/working" component={Working} />
         <Route exact path="/contact" component={Contact} />
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/member_register" component={MemberRegister} />
-        <Route path="/member_login" component={Member_Login} />
+        {/*<Route path="/member_register" component={MemberRegister} />
+        <Route path="/member_login" component={Member_Login} />*/}
       </Switch>
       
   

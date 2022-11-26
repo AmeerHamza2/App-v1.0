@@ -9,6 +9,7 @@ function MyBookings() {
 
   useEffect(() => {
     const user = AuthService.getCurrentCustomer();
+
     CustomerService.findMyOrders(user.userId)
       .then((res) => {
         setorders(res);

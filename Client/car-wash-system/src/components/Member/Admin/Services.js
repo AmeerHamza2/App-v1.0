@@ -3,6 +3,7 @@ import PackageServices from "../../../services/member/package/package_services";
 import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
+import AuthService from "../../../services/member/auth_service"
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -12,8 +13,10 @@ function Services() {
   const [iserror, setIserror] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
 
+  const serviceProvider = AuthService.getAdmin();
+
   const getAllServices = () => {
-    PackageServices.getAllServices()
+    PackageServices.getAllServices(serviceProvider.userId)
       .then((response) => {
         setServices(response);
       })
@@ -26,11 +29,15 @@ function Services() {
   }, []);
 
   const dynamicTypeLookUp = {
-    1: "Car Care Services",
-    2: "Periodic Car Service",
+    1: "Mechanical Services",
+    2: "Electrical Services",
+    3: "Wheel Allignment Services",
+    4: "Paint & Bodywork Services",
+    5: "Lubricants And Filter Services",
+    6: "Vehicle Detailing Services"
   };
   const dynamicWhereLookUp = {
-    1: "Free Pickup & Drop",
+    1: "Pickup & Drop",
     2: "Service @ Doorstep",
   };
   const [columns, setColumns] = useState([
@@ -59,7 +66,8 @@ function Services() {
         newData.price,
         newData.description,
         newData.timeRequired,
-        newData.where
+        newData.where,
+        serviceProvider.userId
       )
         .then((res) => {
           let dataToAdd = [...services];

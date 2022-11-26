@@ -25,7 +25,8 @@ exports.findAvailable = (req, res) => {
 
 //FInd All Mechanics
 exports.findAll = (req, res) => {
-  Member.find({role:"MECHANIC"})
+  const serviceProviderId = req.body.serviceProviderId;
+  Member.find({role:"MECHANIC", serviceProviderId: req.params.serviceProviderId})
     .select("firstname lastname email mobile status")
     .exec()
     .then((response) => {

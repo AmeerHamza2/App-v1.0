@@ -25,7 +25,7 @@ export default function Services(props) {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    Package.getAllServices()
+    Package.getAllServicesForCustomer()
       .then((response) => {
         setServices(response);
       })
@@ -38,9 +38,17 @@ export default function Services(props) {
     var type,
       where = "";
     if (res.serviceType == 1) {
-      type = "Car Care Services";
-    } else {
-      type = "Periodic Car Service";
+      type = "Mechanical Services";
+    } else if (res.serviceType == 2) {
+      type = "Electrical Services";
+    } else if (res.serviceType == 3) {
+      type = "Wheel Allignment Services";
+    }else if (res.serviceType == 4) {
+      type = "Paint & Bodywork Services";
+    }else if (res.serviceType == 5) {
+      type = "Lubricants And Filter Service";
+    }else if (res.serviceType == 6) {
+      type = "Vehicle Detailing Services";
     }
 
     if (res.where == 1) {
@@ -96,9 +104,11 @@ export default function Services(props) {
     <div className="container">
       <button onClick={() => history.push(`/cust_home`)}>Change Car</button>
       <hr />
-      <Grid container spacing={5} className="grid_container">
-        {services.map((res) => getServiceCards(res))}
-      </Grid>
+      {services ? (
+        <Grid container spacing={5} className="grid_container">
+          {services.map((res) => getServiceCards(res))}
+        </Grid>
+      ) : <h1>No Services Listed</h1>}
     </div>
   );
 }

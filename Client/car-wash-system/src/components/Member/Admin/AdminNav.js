@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../Home/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import AuthService from "../../../services/member/auth_service";
+import Logo from "../../../assets/images/Logo.png"
 
 function AdminNav() {
   const [show, setShow] = useState(false);
@@ -32,8 +33,8 @@ function AdminNav() {
       <a href="/admin_home">
         <img
           className="nav__logo"
-          src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
-          alt="WYPE LOGO"
+          src= {Logo}
+          alt="CARSAZ LOGO"
         />
       </a>
       <div

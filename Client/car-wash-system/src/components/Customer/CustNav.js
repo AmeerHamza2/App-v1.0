@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../Home/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import AuthService from "../../services/customer/authentication/auth_service";
+import Logo from "../../assets/images/Logo.png"
+
 
 function CustNav() {
   const [show, setShow] = useState(false);
@@ -17,8 +19,14 @@ function CustNav() {
     };
   }, []);
 
+  const user = AuthService.getCurrentCustomer();
+
+  console.log("In Nav")
+  console.log(user)
+
   const logout = () => {
     AuthService.logout();
+    
   };
 
   return (
@@ -26,8 +34,8 @@ function CustNav() {
       <a href="/cust_home">
         <img
           className="nav__logo"
-          src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
-          alt="WYPE LOGO"
+          src= {Logo}
+          alt="CARSAZ LOGO"
         />
       </a>
       <div
@@ -35,6 +43,12 @@ function CustNav() {
           show && "nav__containerscroll nav__borderXwidthscroll"
         }`}
       >
+         <NavLink
+          className={`nav__link ${show && "nav__linkscroll"}`}
+          to="/cust_home"
+        >
+          {user.firstname.toUpperCase()}
+        </NavLink>
         <NavLink
           className={`nav__link ${show && "nav__linkscroll"}`}
           to="/cust_home"

@@ -32,7 +32,7 @@ exports.login = (req, res, next) => {
             return res.status(200).json({
               message: "Authentication Successful",
               userId: user._id,
-              name: user.name,
+              name: user.firstname,
               email: user.email,
               role: user.role,
               token: token,
@@ -102,11 +102,11 @@ exports.register = (req, res, next) => {
     });
 };
 exports.registerMechanic = (req, res, next) => {
-  if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.mobile) {
+   if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.mobile) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  Mechanic.find({ email: req.body.email })
+  Member.find({ email: req.body.email })
     .exec()
     .then((user) => {
       if (user.length >= 1) {
@@ -120,13 +120,15 @@ exports.registerMechanic = (req, res, next) => {
               error: err,
             });
           } else {
-            const member = new Mechanic({
+            const member = new Member({
               _id: new mongoose.Types.ObjectId(),
               firstname: req.body.firstname,
               lastname: req.body.lastname,
               password: hash,
               mobile: req.body.mobile,
-              email: req.body.email
+              email: req.body.email,
+              role:req.body.role,
+              serviceProviderId: req.body.serviceProviderId 
             });
             member
               .save()
@@ -147,6 +149,7 @@ exports.registerMechanic = (req, res, next) => {
         });
       }
     });
+
 };
 
 /*exports.registerMechanic = (req, res, next) => {

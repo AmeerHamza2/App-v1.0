@@ -4,7 +4,12 @@ const CustomerModel = require("../model/customerModel");
 
 //Find Placed Orders
 exports.findPlacedOrders = (req, res) => {
-  OrderModel.find({ status: "PLACED" })
+  OrderModel.find({
+  $or: [
+   { status: "IN-PROCESS", serviceProviderId: req.params.serviceProviderId},
+    {  status: "PLACED",  serviceProviderId: req.params.serviceProviderId},
+  ],
+})
     .exec()
     .then((response) => {
       if (response.length == 0) {

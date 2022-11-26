@@ -3,6 +3,7 @@ const MemberModel = require("../model/mechanicModel");
 
 //Find IN-PROCESS Orders
 exports.findInProcessOrders = (req, res) => {
+  
   OrderModel.find({
     $or: [
       { mechanicId: req.params.mechId, status: "IN-PROCESS" },
@@ -11,6 +12,8 @@ exports.findInProcessOrders = (req, res) => {
   })
     .exec()
     .then((response) => {
+      console.log("RESPONSE")
+      console.log(response)
       if (response.length == 0) {
         res.status(200).json({
           message: "No Orders are available",

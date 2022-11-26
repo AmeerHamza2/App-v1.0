@@ -15,7 +15,10 @@ function FindOrders() {
 
   useEffect(() => {
     const mechanic = AuthService.getCurrentMechanic();
+    console.log("IN Print123")
     console.log(mechanic)
+    //console.log(mechanic.userId)
+    
     MechanicOrders.getInProcessOrders(mechanic.userId)
       .then((response) => {
         setOrders(response);
@@ -25,8 +28,9 @@ function FindOrders() {
       });
   }, []);
 
+  //console.log(orders)
+  console.log("print2")
   console.log(orders)
-
   const dynamicMechanicsLookUp = {
     ACCEPTED: "ACCEPTED",
     REJECT: "REJECTED",

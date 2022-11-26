@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../../Home/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import AuthService from "../../../services/member/auth_service";
+import mechanic from "./Mechanic";
+import Logo from "../../../assets/images/Logo.png"
 
 function MechanicNav() {
   const [show, setShow] = useState(false);
-
+  
+  const mechanic = AuthService.getCurrentMechanic();
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {
@@ -15,19 +18,22 @@ function MechanicNav() {
     return () => {
       window.removeEventListener("scroll", () => {});
     };
+    
   }, []);
 
   const logout = () => {
     AuthService.logoutMechanic();
   };
 
+  console.log(mechanic)
+
   return (
     <nav className={`nav ${show && "nav__scroll"}`}>
       <a href="/mechanic_home">
         <img
           className="nav__logo"
-          src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
-          alt="WYPE LOGO"
+          src={Logo}
+          alt="CARSAZ LOGO"
         />
       </a>
       <div
@@ -39,7 +45,7 @@ function MechanicNav() {
           className={`nav__link ${show && "nav__linkscroll"}`}
           to="/mechanic_home"
         >
-          MECHANIC
+          {mechanic.name.toUpperCase()}
         </NavLink>
         <NavLink
           onClick={logout}

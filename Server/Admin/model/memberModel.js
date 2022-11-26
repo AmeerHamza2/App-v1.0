@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  serviceProviderId: { type: String},
   email: {
     type: String,
     required: true,

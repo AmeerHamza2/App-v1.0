@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import "./Login.css";
 import { useSnackbar } from "notistack";
-
+import { toast } from "react-toastify";
 export default function Login(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { handleSubmit, register, errors } = useForm({
@@ -19,9 +19,11 @@ export default function Login(props) {
   });
   const onSubmit = (values) => {
     AuthService.login(values.email, values.password).then((response) => {
-      console.log(response);
+      if (response.role === "CUSTOMER") {
+        props.history.push("/cust_home").then(window.location.reload());
+      }
       
-      props.history.push("/cust_home").then(window.location.reload());
+      props.history.push("/login");
     })
     
   };
@@ -67,6 +69,10 @@ export default function Login(props) {
           {errors.password && (
             <span className="span">{errors.password.message}</span>
           )}
+          
+              
+                    <Link to="/ForgetPassword"><label className="right-label">Forget password?</label></Link>
+                    <br/>
           <Button className="login__button" type="submit" block color="primary">
             Sign In
           </Button>

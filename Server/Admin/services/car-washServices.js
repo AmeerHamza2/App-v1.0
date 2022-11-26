@@ -9,7 +9,8 @@ router.post(
   ServiceController.addService
 );
 
-router.get("/findAll", ServiceController.findAll);
+router.get("/findAll/:serviceProviderId", ServiceController.findAll);
+router.get("/findAllServicesForCustomer/", ServiceController.findAllServicesForCustomer);
 
 router.get("/findById/:serviceId", ServiceController.findByServiceId);
 router.patch(

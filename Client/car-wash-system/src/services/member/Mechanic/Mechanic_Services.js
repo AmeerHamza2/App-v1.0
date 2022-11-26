@@ -6,9 +6,9 @@ const API_URL = "http://localhost:8088/admin/mechanic/";
 const ACC_URL = "http://localhost:8020/mechanic/account/";
 
 class MechanicService {
-  findAll() {
+  findAll(serviceProviderId) {
     return axios
-      .get(API_URL + "findAll", {
+      .get(API_URL + `findAll/${serviceProviderId}`, {
         headers: authHeader(),
       })
       .then((res) => {

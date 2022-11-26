@@ -36,9 +36,10 @@ function Order(props) {
         console.log(err);
       });
   };
-
+  
   useEffect(() => {
     const user = AuthService.getCurrentCustomer();
+    console.log("Checking User")
     console.log(user);
     setUser(user);
 
@@ -58,7 +59,8 @@ function Order(props) {
       values.carNumber,
       values.custAddress,
       service.name,
-      service.price
+      service.price,
+      service.serviceProviderId
     )
       .then((response) => {
         enqueueSnackbar(response, {

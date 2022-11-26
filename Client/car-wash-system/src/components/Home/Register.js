@@ -3,24 +3,34 @@ import TextField from "@material-ui/core/TextField";
 import Button from "react-bootstrap/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import AuthService from "../../services/customer/authentication/auth_service";
 
 function Register(props) {
+
+  const [password, setPassword] = useState();
+  const [cPassword, setcPassword] = useState();
+  
   const { handleSubmit, register, errors } = useForm({
     mode: "onBlur",
   });
   const onSubmit = (values) => {
-    AuthService.register(
-      values.firstname,
-      values.lastname,
-      values.email,
-      values.password
-    ).then((respone) => {
-      props.history.push("/login");
-    });
-  };
+   if(password == cPassword)
+    { AuthService.register(
+    values.firstname,
+    values.lastname,
+    values.email,
+    values.password
+  ).then((respone) => {
+    props.history.push("/login");
+  });
+}
+else{
+  window.alert("Passwords Don't Match!")
+}
+}
   return (
     <Container maxWidth="xs">
       <div className="login__form">
@@ -70,6 +80,7 @@ function Register(props) {
           />
           {errors.email && <span className="span">{errors.email.message}</span>}
           <TextField
+            id = "password"
             variant="outlined"
             margin="normal"
             fullWidth
@@ -84,10 +95,38 @@ function Register(props) {
                 message: "Minimum length of 6 is required",
               },
             })}
+            onChange = {() => {
+              setPassword(document.getElementById("password").value)
+            }}
           />
           {errors.password && (
             <span className="span">{errors.password.message}</span>
           )}
+
+<TextField
+            id="confirmPassword"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            label="Confirm Password"
+            type="password"
+            name="confirmpassword"
+            placeholder="Enter Password"
+            inputRef={register({
+              required: "Password is Required",
+              minLength: {
+                value: 6,
+                message: "Minimum length of 6 is required",
+              },
+            })}
+            onChange = {() => {
+              setcPassword(document.getElementById("confirmPassword").value)
+            }}
+          />
+          {errors.password && (
+            <span className="span">{"Confirm " + errors.password.message}</span>
+          )}
+
           <Button className="login__button" type="submit" block color="primary">
             Sign Up
           </Button>
