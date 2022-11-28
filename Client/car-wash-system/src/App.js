@@ -13,8 +13,8 @@ import Working from  "./components/Home/Working";
 // Customer Routes
 import Register from "./components/Home/Register";
 import Login from "./components/Home/Login";
-// import ForgetPassword from "./components/Home/ForgetPassword";
-// import ResetPassword from "./components/Home/ResetPassword";
+import ForgetPassword from "./components/Home/ForgetPassword";
+import ResetPassword from "./components/Home/ResetPassword";
 
 // Member routes
 import MemberRegister from "./components/Member/MemberRegister"
@@ -46,8 +46,8 @@ function App() {
         {/* Customer Authentication Routes*/}
       <Route path="/Register" component={Register} />
       <Route path="/login" component={Login} />
-        {/* <Route path="/ForgetPassword" exact component={ForgetPassword} />
-        <Route path="/ResetPassword/:resetLink" exact component={ResetPassword} /> */}
+         <Route path="/ForgetPassword" exact component={ForgetPassword} /> 
+         <Route path="/ResetPassword/:resetLink" exact component={ResetPassword} />
 
 {/* Member Authentication Routes*/}
         <Route path="/member_register" component={MemberRegister} />

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var bcrypt = require("bcryptjs");
 
 const customerSchema = mongoose.Schema({
   firstname: {
@@ -21,6 +22,15 @@ const customerSchema = mongoose.Schema({
     type: String,
     default: "CUSTOMER",
   },
+  resetLink:{
+    data:String,
+    default:''
+  },
 });
+
+customerSchema.methods.generateHashedPassword = async function () {
+  let salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+};
 
 module.exports = mongoose.model("customers", customerSchema);

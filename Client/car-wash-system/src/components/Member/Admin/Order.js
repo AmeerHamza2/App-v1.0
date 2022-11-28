@@ -62,9 +62,9 @@ function Orders() {
 
   const dynamicMechanicsLookUp = {
     "6382142d2e7e8d69487335b9": "Usman",
-    "5f448212e2fd8a20782f6d83": "Mechanic 2",
-    "5f448222e2fd8a20782f6d84": "Mechanic 3",
-    "5f4dde667a82de39880f577c": "Mechanic 4",
+    // "5f448212e2fd8a20782f6d83": "Mechanic 2",
+    // "5f448222e2fd8a20782f6d84": "Mechanic 3",
+    // "5f4dde667a82de39880f577c": "Mechanic 4",
   };
   console.log(dynamicMechanicsLookUp);
    

@@ -45,6 +45,39 @@ class AuthService {
     });
   }
 
+  resetPassword(resetLink,newPass) {
+    return axios
+      .put(AUTH_URL + "resetPassword", { resetLink,newPass })
+      .then((response) => {
+        
+       
+        return response.data;
+      })
+      .catch((err) => {
+        console.log("Login Error: " + err);
+        return err;
+      });
+  }
+
+  forgotPassword(email) {
+    return axios
+      .put(AUTH_URL + "forgotPassword", { email })
+      .then((response) => {
+       
+        toast.success("check your Mail!", {
+          position: toast.POSITION.TOP_CENTER
+        });
+  
+  
+        return response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+        
+      });
+  }
+  
+
   isAuthenticated() {
     return this.authenticated;
   }
@@ -52,5 +85,8 @@ class AuthService {
     return JSON.parse(localStorage.getItem("customer"));
   }
 }
+
+
+
 
 export default new AuthService();
