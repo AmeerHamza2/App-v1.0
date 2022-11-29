@@ -13,6 +13,8 @@ router.get("/findAll/:serviceProviderId", ServiceController.findAll);
 router.get("/findAllServicesForCustomer/", ServiceController.findAllServicesForCustomer);
 
 router.get("/findById/:serviceId", ServiceController.findByServiceId);
+router.get("/findByServiceProviderId/:serviceProviderId", ServiceController.findByServiceProviderId);
+
 router.patch(
   "/updateService/:serviceId",
   [checkAuth.verifyToken, checkAuth.isAdmin],

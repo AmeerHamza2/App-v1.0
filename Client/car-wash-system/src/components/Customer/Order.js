@@ -7,6 +7,7 @@ import "./CSS/Order.css";
 import { Card, Grid, TextField, Button } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
+import ServiceProviderService from "../../services/member/auth_service"
 
 function Order(props) {
   const { match, history } = props;
@@ -16,6 +17,9 @@ function Order(props) {
   const [service, setService] = useState([]);
   const [car, setCar] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  
+
 
   const getPackage = () => {
     PackageService.findServiceById(serviceId)
@@ -46,6 +50,15 @@ function Order(props) {
     getCar();
     getPackage();
   }, []);
+
+  (async () => {
+    const id = await service.serviceProviderId;
+     // {"metadata": "for: test.png"}
+})();
+
+  const id = service.serviceProviderId
+  const serviceProvider = PackageService.findByServiceProviderId(id).then((res) => {console.log(res)})
+  console.log("Printing" + serviceProvider)
 
   const { handleSubmit, register, errors } = useForm({
     mode: "onBlur",
@@ -132,6 +145,7 @@ function Order(props) {
             <h3>Total Price: {service.price}</h3>
             <h3>Time Required: {service.timeRequired}</h3>
             <h3>Selected Car: {car.name}</h3>
+            
           </Grid>
         </Grid>
       </Card>

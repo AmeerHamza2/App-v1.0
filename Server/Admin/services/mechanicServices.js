@@ -4,7 +4,7 @@ const checkAuth = require("../middlewares/check-auth");
 const MechanicController = require("../controllers/mechanicController");
 
 router.get(
-  "/findAvailable",
+  "/findAvailable/:serviceProviderId",
   [checkAuth.verifyToken, checkAuth.isAdmin],
   MechanicController.findAvailable
 );

@@ -64,6 +64,8 @@ export default function Member_Login(props) {
           {errors.password && (
             <span className="span">{errors.password.message}</span>
           )}
+          <Link to="/ForgetPasswordMember"><label className="right-label">Forget password?</label></Link>
+                    <br/>
           <Button className="login__button" type="submit" block color="primary">
             Sign In
           </Button>

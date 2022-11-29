@@ -33,9 +33,9 @@ class MechanicService {
       });
   }
 
-  findAvailable() {
+  findAvailable(serviceProviderId) {
     return axios
-      .get(API_URL + "findAvailable", {
+      .get(API_URL + `findAvailable/${serviceProviderId}`, {
         headers: authHeader(),
       })
       .then((res) => {

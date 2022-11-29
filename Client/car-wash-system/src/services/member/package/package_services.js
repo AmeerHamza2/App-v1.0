@@ -91,6 +91,21 @@ class Package {
         console.log(err);
       });
   }
+
+
+  findByServiceProviderId(serviceProviderId) {
+    return axios
+      .get(API_URL + `findByServiceProviderId/${serviceProviderId}`)
+      .then((res) => {
+        return res.data.response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  
 }
 
 export default new Package();

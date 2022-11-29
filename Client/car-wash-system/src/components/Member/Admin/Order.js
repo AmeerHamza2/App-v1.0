@@ -5,6 +5,7 @@ import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
 import AuthService from "../../../services/member/auth_service"
+import {useMemo} from 'react'
 
 function Orders() {
   const [orders, setOrders] = useState([]);
@@ -22,10 +23,11 @@ function Orders() {
     const id = [item._id];
     return { [id]: item.firstname };
   }
-
+  
+  console.log(serviceProvider.userId)
 
   const getAvailableMechanics = () => {
-    MechanicController.findAvailable()
+    MechanicController.findAvailable(serviceProvider.userId)
       .then((response) => {
         setMechanics(response.map(createMechanic));
       })
@@ -60,15 +62,31 @@ function Orders() {
     getAvailableMechanics();
   }, []);
 
-  const dynamicMechanicsLookUp = {
-    "6382142d2e7e8d69487335b9": "Usman",
-    // "5f448212e2fd8a20782f6d83": "Mechanic 2",
-    // "5f448222e2fd8a20782f6d84": "Mechanic 3",
-    // "5f4dde667a82de39880f577c": "Mechanic 4",
+  var dynamicMechanicsLookUp = {
+    "6385b81587098a69ec40b5c1": "Usman",
+    "6385b84487098a69ec40b5c8": "Abdul Wasey",
+    "6385b90587098a69ec40b5da": "Asad",
+    "6385b90587098a69ec40b5daxx": "Asad AkrM",
+  
   };
   console.log(dynamicMechanicsLookUp);
-   
-  console.log({...mechanics});
+   var mechs = {...mechanics}
+  var newMechs = []
+  for(let i in mechs){
+    
+    console.log(Object.keys(mechs[i])[0])
+    newMechs[Object.keys(mechs[i])[0]] = Object.values(mechs[i])[0]
+    
+  }
+
+    console.log(dynamicMechanicsLookUp)
+  newMechs = {...newMechs}
+  console.log(typeof(newMechs))
+
+
+  // const _mechs = Object.assign({}, newMechs)
+
+  // console.log(_mechs);
 
   const [columns, setColumns] = useState([
     { title: "OrderId", field: "_id", editable: "never" },
@@ -82,9 +100,25 @@ function Orders() {
     {
       title: "Assign Mechanic",
       field: "mechanicId",
-      lookup: dynamicMechanicsLookUp,
+      lookup: dynamicMechanicsLookUp
     },
   ]);
+
+  const columnss = React.useMemo(() => ([
+    { title: "OrderId", field: "_id", editable: "never" },
+    { title: "Customer Name", field: "firstName", editable: "never" },
+    { title: "Car Name", field: "carName", editable: "never" },
+    { title: "Car Number", field: "carNumber", editable: "never" },
+    { title: "Address", field: "custAddress", editable: "never" },
+    { title: "Service Name", field: "serviceName", editable: "never" },
+    { title: "Status", field: "status", editable: "never" },
+    { title: "Price", field: "servicePrice", editable: "never" },
+    {
+      title: "Assign Mechanic",
+      field: "mechanicId",
+      lookup: newMechs
+    },
+  ]), [newMechs]);
 
   const [column, setColumn] = useState([
     { title: "OrderId", field: "_id" },
@@ -144,7 +178,7 @@ function Orders() {
       {orders ? (
         <MaterialTable
           title="CURRENT ORDERS DATA"
-          columns={columns}
+          columns={columnss}
           data={orders}
           editable={{
             onRowUpdate: (newData, oldData) =>

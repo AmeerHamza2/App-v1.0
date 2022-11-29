@@ -16,6 +16,9 @@ import Login from "./components/Home/Login";
 import ForgetPassword from "./components/Home/ForgetPassword";
 import ResetPassword from "./components/Home/ResetPassword";
 
+import ForgetPasswordMember from "./components/Member/ForgetPasswordMember";
+import ResetPasswordMember from "./components/Member/ResetPasswordMember";
+
 // Member routes
 import MemberRegister from "./components/Member/MemberRegister"
 import Member_Login from "./components/Member/Member_Login";
@@ -49,6 +52,9 @@ function App() {
          <Route path="/ForgetPassword" exact component={ForgetPassword} /> 
          <Route path="/ResetPassword/:resetLink" exact component={ResetPassword} />
 
+         <Route path="/ForgetPasswordMember" exact component={ForgetPasswordMember} /> 
+         <Route path="/ResetPasswordMember/:resetLink" exact component={ResetPasswordMember} />
+          
 {/* Member Authentication Routes*/}
         <Route path="/member_register" component={MemberRegister} />
         <Route path="/member_login" component={Member_Login} />

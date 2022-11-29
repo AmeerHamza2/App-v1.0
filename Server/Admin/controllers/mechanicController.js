@@ -2,7 +2,7 @@ const Member = require("../model/memberModel");
 
 //FInd Available Mechanics
 exports.findAvailable = (req, res) => {
-  Member.find({ status: "AVAILABLE" , role: "MECHANIC"})
+  Member.find({ status: "AVAILABLE" , role: "MECHANIC", serviceProviderId: req.params.serviceProviderId})
     .exec()
     .then((response) => {
       if (response.length == 0) {
